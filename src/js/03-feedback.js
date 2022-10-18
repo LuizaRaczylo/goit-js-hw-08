@@ -3,14 +3,14 @@ const throttle = require(`lodash.throttle`);
 const form = document.querySelector('.feedback-form');
 const emailLabel = document.querySelector('input');
 const messageLabel = document.querySelector('textarea');
-const data = {
-        email: emailLabel.value,
-        message: messageLabel.value,
-    };
 
 form.addEventListener('input', throttle(inputData, 500));
 
 function inputData() {
+    const data = {
+        email: emailLabel.value,
+        message: messageLabel.value,
+    };
     localStorage.setItem(`feedback-form-state`, JSON.stringify(data));
 }
 if (localStorage === " ") {
@@ -25,8 +25,8 @@ function handleSubmit(e) {
     if (email.value === `` || message.value === ``) {
         return alert(`Please complete all fields!`);
     } else {
-        const result = { email: email.value, message: message.value };
-        console.log(result);
+        console.log(`email: "${email.value}", message: "${message.value}"`);
+        e.currentTarget.reset();
         localStorage.removeItem(`feedback-form-state`);
     }
 }
